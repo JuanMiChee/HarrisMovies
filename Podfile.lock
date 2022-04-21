@@ -1,0 +1,27 @@
+PODS:
+  - Longinus (1.1.17):
+    - Longinus/General (= 1.1.17)
+  - Longinus/Cache (1.1.17):
+    - Longinus/Utility
+  - Longinus/General (1.1.17):
+    - Longinus/Networking
+  - Longinus/ImageCode (1.1.17):
+    - Longinus/Utility
+  - Longinus/Networking (1.1.17):
+    - Longinus/Cache
+    - Longinus/ImageCode
+  - Longinus/Utility (1.1.17)
+
+DEPENDENCIES:
+  - Longinus
+
+SPEC REPOS:
+  trunk:
+    - Longinus
+
+SPEC CHECKSUMS:
+  Longinus: 55f4938698f725f9e1fc8ecfa0992f53af0c2316
+
+PODFILE CHECKSUM: 3e7c52b994f819cb4b9bc51725ad8aabca719d3f
+
+COCOAPODS: 1.11.3
