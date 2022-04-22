@@ -17,27 +17,28 @@ class ViewPresenter: Presenter {
     
     func viewDidLoadPresenterFunction() {
         downloadImage(url: parsedUrl!)
-        //downloadImage(url: imagesUrl!)
     }
     
-    func downloadImage(url:URL) {
+    private func downloadImage(url:URL) {
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
                 if let error = error {
                     print("Error en la operación \(error)")
-                    self.view?.alertData(result: "Error has ocurred = not found" )
+                    DispatchQueue.main.async {
+                        self.view?.alertData(result: "Error has ocurred = not found" )
+                    }
                 }
                 return
             }
             
-            if let decodedData = try? JSONDecoder().decode(PopularMoviesJson.self, from: data){
+            if let decodedData = try? JSONDecoder().decode(PopularMoviesJson.self, from: data) {
                 DispatchQueue.main.async {
                     let viewModels = decodedData.results.map { (movieJSON) -> MovieViewModel in
                         .init(imageUrlPath: String(movieJSON.poster_path), backdropImagesUrlPath: String(movieJSON.backdrop_path), title: movieJSON.original_title, description: movieJSON.overview)
                     }
-                    if viewModels.isEmpty{
+                    if viewModels.isEmpty {
                         self.view?.alertData(result: "movies not found...")
-                    }else{
+                    }else {
                         self.view?.display(result: viewModels)
                     }
                 }
