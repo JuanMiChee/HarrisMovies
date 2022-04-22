@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TEf-iJ-JMY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="752"/>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wTf-5w-N3O">
                                     <size key="itemSize" width="222" height="318"/>
@@ -27,7 +27,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="DqX-Dp-LZR">
-                                    <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="752"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" systemColor="systemIndigoColor"/>
@@ -78,20 +78,34 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="hYi-Iq-nkZ"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" placeholder="Search Bar" translatesAutoresizingMaskIntoConstraints="NO" id="aWR-Mg-K8H">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <color key="barTintColor" red="0.056571224619999999" green="0.056571224619999999" blue="0.056571224619999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="searchField.textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="aWR-Mg-K8H" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ask-JR-4RC"/>
+                            <constraint firstItem="TEf-iJ-JMY" firstAttribute="top" secondItem="aWR-Mg-K8H" secondAttribute="bottom" id="GvB-Gh-e4W"/>
                             <constraint firstItem="TEf-iJ-JMY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="JfB-yX-gd9"/>
                             <constraint firstItem="TEf-iJ-JMY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RxX-pz-jSl"/>
+                            <constraint firstItem="aWR-Mg-K8H" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dC7-qZ-rVd"/>
+                            <constraint firstItem="aWR-Mg-K8H" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="efX-c4-jbQ"/>
                             <constraint firstAttribute="bottom" secondItem="TEf-iJ-JMY" secondAttribute="bottom" id="yCX-Kp-7OK"/>
-                            <constraint firstItem="TEf-iJ-JMY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="zqa-At-4mE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QVz-hM-kGV"/>
                     <connections>
                         <outlet property="activityIndicatorActive" destination="DqX-Dp-LZR" id="WYZ-fL-1Zv"/>
                         <outlet property="collectionView" destination="TEf-iJ-JMY" id="az3-9s-JJ1"/>
+                        <outlet property="searchBar" destination="aWR-Mg-K8H" id="dg7-au-8En"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
