@@ -5,12 +5,11 @@
 //  Created by Juan Harrington on 18/04/22.
 //
 
-import UIKit
 import Longinus
 
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
+        
     private lazy var presenter: Presenter = {
         let presenter = ViewPresenter()
         presenter.view = self
@@ -19,20 +18,29 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicatorActive: UIActivityIndicatorView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         activityIndicatorActive.startAnimating()
         presenter.viewDidLoadPresenterFunction()
+        
+        searchBar.delegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty{
+            filteredArray = moviesArray
+        }else{
+            print("wirte...")
+            filteredArray = moviesArray.filter {
+                $0.title.range(of: searchText, options: .caseInsensitive) != nil
+            }
+        }
         
-        
+        collectionView.reloadData()
     }
-        
+    
     func showActionSheet(errorMessage: String){
         let alert = UIAlertController(title: "ERROR", message: errorMessage, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Retry", style: .cancel, handler: {action in
@@ -44,24 +52,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     var moviesArray = [MovieViewModel]()
+    var filteredArray = [MovieViewModel]()
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return moviesArray.count
+        return filteredArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DataCollectionViewCell
-        let viewModel = moviesArray[indexPath.row]
+        let viewModel = filteredArray[indexPath.row]
         //let posterPath = viewModel.imageUrlPath
         cell.DataLabel.text = viewModel.title
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                     willDisplay cell: UICollectionViewCell,
-                     forItemAt indexPath: IndexPath){
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath){
         let cell = cell as! DataCollectionViewCell
-        let viewModel = moviesArray[indexPath.row]
+        let viewModel = filteredArray[indexPath.row]
         let posterPath = viewModel.imageUrlPath
         
         let posterImagesUrl = URL(string: "https://image.tmdb.org/t/p/w200//\(posterPath)?api_key=2e95638bfe81862d6fe6622fe5dcc18a")
@@ -69,7 +79,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movieViewModel = moviesArray[indexPath.row]
+        let movieViewModel = filteredArray[indexPath.row]
         
         if let viewController = storyboard?.instantiateViewController(identifier: "ViewControllerPageTwo") as? ViewControllerPageTwo {
             viewController.movie = movieViewModel
@@ -91,6 +101,7 @@ extension ViewController: View{
     
     func display(result:[MovieViewModel]) {
         moviesArray = result
+        filteredArray = result
         activityIndicatorActive.stopAnimating()
         collectionView.reloadData()
     }
