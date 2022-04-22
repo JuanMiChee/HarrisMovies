@@ -9,7 +9,6 @@ import UIKit
 import Longinus
 
 
-
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     private lazy var presenter: Presenter = {
@@ -28,14 +27,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         presenter.viewDidLoadPresenterFunction()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+        
     func showActionSheet(errorMessage: String){
-        let alert = UIAlertController(title: "title", message: errorMessage, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "dismiss", style: .cancel, handler: {action in
-            print("c piso el cancel padre")
+        let alert = UIAlertController(title: "ERROR", message: errorMessage, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Retry", style: .cancel, handler: {action in
+            //self.showActionSheet(errorMessage: errorMessage)
+            self.presenter.viewDidLoadPresenterFunction()
+            print("Retry was pressed")
         }))
-        DispatchQueue.main.async{
-            self.present(alert, animated: true)
-        }
+        self.present(alert, animated: true)
     }
     
     var moviesArray = [MovieViewModel]()
@@ -47,13 +52,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DataCollectionViewCell
         let viewModel = moviesArray[indexPath.row]
+        //let posterPath = viewModel.imageUrlPath
+        cell.DataLabel.text = viewModel.title
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                     willDisplay cell: UICollectionViewCell,
+                     forItemAt indexPath: IndexPath){
+        let cell = cell as! DataCollectionViewCell
+        let viewModel = moviesArray[indexPath.row]
         let posterPath = viewModel.imageUrlPath
         
         let posterImagesUrl = URL(string: "https://image.tmdb.org/t/p/w200//\(posterPath)?api_key=2e95638bfe81862d6fe6622fe5dcc18a")
         cell.ImageView.lg.setImage(with: posterImagesUrl)
-        
-        cell.DataLabel.text = viewModel.title
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -66,6 +78,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 }
 
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 200, height: 300)
+    }
+}
+
 extension ViewController: View{
     func alertData(result: String) {
         showActionSheet(errorMessage: result )
@@ -74,10 +92,6 @@ extension ViewController: View{
     func display(result:[MovieViewModel]) {
         moviesArray = result
         activityIndicatorActive.stopAnimating()
-        
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-            
-        }
+        collectionView.reloadData()
     }
 }
