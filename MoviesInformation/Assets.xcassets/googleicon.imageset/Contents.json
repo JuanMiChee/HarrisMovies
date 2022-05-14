@@ -1,0 +1,78 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "alignment-insets" : {
+        "bottom" : 0,
+        "left" : 8,
+        "right" : 0,
+        "top" : 0
+      },
+      "filename" : "googleicon.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "height-class" : "regular",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "height-class" : "regular",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "height-class" : "regular",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "1x",
+      "width-class" : "compact"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "width-class" : "compact"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "width-class" : "compact"
+    },
+    {
+      "height-class" : "regular",
+      "idiom" : "universal",
+      "scale" : "1x",
+      "width-class" : "compact"
+    },
+    {
+      "height-class" : "regular",
+      "idiom" : "universal",
+      "scale" : "2x",
+      "width-class" : "compact"
+    },
+    {
+      "height-class" : "regular",
+      "idiom" : "universal",
+      "scale" : "3x",
+      "width-class" : "compact"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "auto-scaling" : "auto"
+  }
+}
