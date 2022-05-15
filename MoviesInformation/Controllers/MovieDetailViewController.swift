@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewControllerPageTwo: UIViewController {
+class MovieDetailViewController: UIViewController {
     
     @IBOutlet weak var desciptionImage: UIImageView!
     @IBOutlet weak var descriptionParagraph: UITextView!
