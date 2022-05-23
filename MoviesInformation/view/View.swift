@@ -13,6 +13,7 @@ struct MovieViewModel {
     let title: String
     let description: String
 }
+
 protocol View: AnyObject {
     func display(result:[MovieViewModel])
     func alertData(result: String)
