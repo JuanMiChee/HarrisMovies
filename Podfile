@@ -3,6 +3,9 @@
 
 target 'MoviesInformation' do
   pod 'Longinus'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
