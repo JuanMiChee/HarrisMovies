@@ -12,7 +12,10 @@ import CoreData
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
     
     private lazy var presenter: Presenter = {
-        let presenter = ViewPresenter()
+        let fetchData = FetchData()
+        let storage = CoreDataStorage()
+        
+        let presenter = ViewPresenter(fetchData: fetchData, storage: storage)
         presenter.view = self
         return presenter
     }()

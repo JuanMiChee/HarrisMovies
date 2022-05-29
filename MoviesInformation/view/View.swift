@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieViewModel {
+struct MovieViewModel: Equatable {
     let imageUrlPath: String
     let backdropImagesUrlPath: String
     let title: String

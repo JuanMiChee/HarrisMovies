@@ -16,7 +16,11 @@ extension Movie {
         return NSFetchRequest<Movie>(entityName: "Movie")
     }
 
-    @NSManaged public var movieName: String?
+    @NSManaged public var movieName: String
+    @NSManaged public var imageUrlPath: String
+    @NSManaged public var descriptionInfo: String
+    @NSManaged public var backDropImageUrlPath: String
+    
 
 }
 
