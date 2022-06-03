@@ -135,8 +135,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension HomeViewController: View{
-    func alertData(result: String) {
-        showActionSheet(errorMessage: result )
+    func displayAlert(message: String) {
+        showActionSheet(errorMessage: message )
     }
     
     func display(result:[MovieViewModel]) {

@@ -10,7 +10,6 @@ import Foundation
 
 
 class MockView: View{
-    
     var recivedMoviesArray:[MovieViewModel]?
     var recivedAlert: String?
 
@@ -18,10 +17,7 @@ class MockView: View{
         recivedMoviesArray = result
     }
 
-    func alertData(result: String) {
-        recivedAlert = result
-
+    func displayAlert(message: String) {
+        recivedAlert = message
     }
-
-
 }

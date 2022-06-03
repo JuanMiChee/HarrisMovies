@@ -10,7 +10,7 @@ import UIKit
 
 
 enum FetchError: Error {
-    case networkError(error: Error)
+    case networkError(errormessage: String)
 }
 
 protocol FetchDataProtocol{
@@ -29,7 +29,10 @@ class FetchData: FetchDataProtocol{
             guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
                 if let error = error {
                     print("Error en la operación \(error)")
-                    completion(.failure(.networkError(error: error)))
+                    DispatchQueue.main.async {
+                        completion(.failure(.networkError(errormessage: error.localizedDescription)))
+                    }
+                    
                     return
                 }
                 return
@@ -56,7 +59,9 @@ class FetchData: FetchDataProtocol{
                     }
                     try? self.context.save()
         
+                DispatchQueue.main.async {
                     completion(.success(viewModels))
+                }
                 
             }
             if response.statusCode == 200 {

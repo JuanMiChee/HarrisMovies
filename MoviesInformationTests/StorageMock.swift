@@ -13,6 +13,7 @@ class StorageMock : Storage{
     
     var viewModels = [MovieViewModel]()
     
+    
     func fetchMovies() -> [MovieViewModel] {
         return viewModels
     }

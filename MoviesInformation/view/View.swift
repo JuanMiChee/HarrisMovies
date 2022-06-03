@@ -16,5 +16,5 @@ struct MovieViewModel: Equatable {
 
 protocol View: AnyObject {
     func display(result:[MovieViewModel])
-    func alertData(result: String)
+    func displayAlert(message: String)
 }

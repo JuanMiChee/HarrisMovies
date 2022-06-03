@@ -28,18 +28,20 @@ class ViewPresenter: Presenter {
         
         view?.display(result: viewModels)
         fetchData.fetchMoviesFromServer(url: parsedUrl!) { result in
-            DispatchQueue.main.async {
+            //DispatchQueue.main.async {
                 switch result{
                 case .success(let viewModels):
-                    self.view?.display(result: viewModels)
+                    if viewModels.isEmpty{
+                        self.view?.displayAlert(message: "empty array")
+                    }else{
+                        self.view?.display(result: viewModels)
+                    }
+                    
                 case .failure(let error):
-                    self.view?.alertData(result: error.localizedDescription)
+                    self.view?.displayAlert(message: error.localizedDescription)
                 }
-            }
+            //}
         }
     }
-    
-   
-
 }
 
